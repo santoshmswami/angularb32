@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Utility {
 
-  appName: string = "Demo App"
+  appName: string = "Demo App";
+
+  $UserNameList = of(["Punam","rahul","chetan"])
 
   getSumIOf2Num(num1: number, num2: number  ) {
     

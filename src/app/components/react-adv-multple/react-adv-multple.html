@@ -1,0 +1,105 @@
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Employee Onboarding</h5>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="employeeForm">
+
+
+                <div class="row">
+
+                    <!-- Employee Section -->
+                    <div class="col-md-5 border-end">
+                        <h6 class="mb-3 text-primary">Employee Details</h6>
+
+                        <div class="mb-3">
+                            <label class="form-label">Employee Name</label>
+                            <input type="text" formControlName="empName" class="form-control" placeholder="Enter name">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Employee ID</label>
+                            <input type="text"  formControlName="empId" class="form-control" placeholder="Enter ID">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text"  formControlName="city" class="form-control" placeholder="Enter city">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">State</label>
+                            <input type="text"  formControlName="state" class="form-control" placeholder="Enter state">
+                        </div>
+                    </div>
+
+                    <!-- Family Section -->
+                    <div class="col-md-7" formArrayName="familyList">
+                        <div class="row">
+                            <div class="col-6">
+                                <h6 class="mb-3 text-primary">Family Details</h6>
+
+                            </div>
+                            <div class="col-6 text-end">
+                                <button (click)="addFamilyForm()" class="btn btn-sm btn-success">Add New </button>
+                            </div>
+                        </div> 
+
+                        <!-- <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Relation</th>
+                                    <th>Age</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+
+                                <tr *ngFor="let familyForm of empFamilyList.controls;let sr= index" [formGroupName]="sr">
+                                    <td>
+                                        <input type="text" formControlName="relativeName" class="form-control">
+                                    </td>
+                                     <td>
+                                        <input type="text" formControlName="relation" class="form-control">
+                                    </td>
+                                     <td>
+                                        <input type="text" formControlName="age" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table> -->
+                    
+                        <div *ngFor="let familyForm of empFamilyList.controls;let sr= index" class="card mb-3">
+                            <div class="card-body" [formGroupName]="sr">
+                                <h6 class="text-muted">Family Member 1</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="form-label">Name</label>
+                                        <input type="text" formControlName="relativeName" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Relation</label>
+                                        <input type="text" formControlName="relation" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Age</label>
+                                        <input type="number" formControlName="age" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+                <!-- Footer Buttons -->
+                <div class="text-end mt-3">
+                    <button class="btn btn-secondary me-2">Reset</button>
+                    <button class="btn btn-primary" (click)="onSaveEmp()">Save Employee</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<p>signaladv works!</p>
+
+<div class="row">
+    <div class="col-3">
+       courseName =>  {{courseName()}}
+    </div>
+
+    <div class="col-3">
+       courseDuration =>  {{courseDuration()}}
+    </div>
+    <div class="col-3">
+        courseDetails => {{courseDetails()}}
+    </div>
+    <div class="col-3">
+        fullName => {{fullName()}}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        <button (click)="chnagePPrice()"> chnagePPrice</button>
+    </div>
+    <div class="col-3">
+        <button (click)="AddTtoCart()"> AddTtoCart</button>
+    </div>
+        <div class="col-3">
+        <button (click)="chnageDicosunt(20)"> Chnage Dicount to 20</button>
+    </div>
+    <div class="col-3">
+        <button (click)="chnageDicosunt(50)"> Chnage Dicount to 50</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        {{cityList()}}
+    </div>
+
+     <div class="col-3">
+        <button (click)="Addcity('Mumbai')"> Mumbai</button>
+    </div>
+     <div class="col-3">
+        <button (click)="Addcity('Jaipur')"> Jaipur</button>
+    </div>
+      <div class="col-3">
+        <button (click)="addNewCity()"> addNewCity</button>
+    </div>
+      <div class="col-3">
+        <button (click)="chnageCity()"> chnageCity</button>
+    </div>
+</div>
+<br>
+{{studentObj().name}} == {{studentObj().city}} == {{studentObj().mobile}} 

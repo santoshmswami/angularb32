@@ -6,6 +6,8 @@ import { Utility } from '../../services/utility';
 import { Alerts } from '../../services/alerts';
 import { NaPipe } from '../../pipes/na-pipe';
 import { Highlight } from '../../directives/highlight';
+import {  VendorModel } from '../../models/classes/vendor.model';
+import { IVendorModel } from '../../models/interfaces/Employee.Model';
 
 @Component({
   selector: 'app-vendor-master',
@@ -17,22 +19,31 @@ import { Highlight } from '../../directives/highlight';
 export class VendorMaster implements OnInit {
 
   private http = inject(HttpClient);
-  vendorList = signal<any[]>([]);
+  vendorList = signal<VendorModel[]>([]);
 
   utiltiySrv =  inject(Utility)
 
+  coruserName: string;
 
-  newVendorObj: any = {
-    vendorId: 0,
-    vendorName: "",
-    contactNo: "",
-    emailId: ""
-  };
+  // newVendorObj: any = {
+  //   vendorId: 0,
+  //   vendorName: "",
+  //   contactNo: "",
+  //   emailId: ""
+  // };
 
+  // newVendorObj: VendorModel = new VendorModel();
+
+  newVendorObj: IVendorModel = {   
+    emailId:'',
+    vendorId:0,
+    vendorName:''
+  }
   alertServ =  inject(Alerts)
 
   constructor(private vendorSrv: VendorService) {
     
+    this.coruserName = "";
     const resulul1 =  this.utiltiySrv.getSum(1,3,5);
 
     const result2 =  this.utiltiySrv.getSum(2,4,6,7,8,9);
@@ -47,8 +58,23 @@ export class VendorMaster implements OnInit {
   }
 
   ngOnInit(): void {
-    
     this.getAllVendors()
+  }
+
+  onReset() {
+    // this.newVendorObj = {
+    //   vendorId: 0,
+    //   vendorName: "",
+    //   contactNo: "",
+    //   emailId: ""
+    // };
+    //this.newVendorObj =  new VendorModel();
+    this.newVendorObj = {
+      contactNo:'',
+      emailId:'',
+      vendorId:0,
+      vendorName:''
+    }
   }
 
   // getAllVendors() {

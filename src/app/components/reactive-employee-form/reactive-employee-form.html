@@ -1,9 +1,10 @@
 <div class="container-fluid mt-1">
-    <app-tabs [tabList]="tabs" [activeTabName]="currentTab" (onTabChange)="getCurrentTab($event)"></app-tabs>
+    <!-- <app-tabs [tabList]="tabs" [activeTabName]="currentTab" (onTabChange)="getCurrentTab($event)"></app-tabs> -->
+    <button routerLink="/employee-form?empid=0" class="btn btn-success">New Employee</button>
     <br>
     <div class="row">
         <!-- Table Column -->
-        @if (currentTab == 'Employee List') {
+     
         <div class="col-12">
             <div class="card">
                 <div class="card-header bg-warning text-dark">
@@ -47,118 +48,7 @@
                 </div>
             </div>
         </div>
-        } @else {
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-warning text-dark">
-                    <h5 class="mb-0">Add/Edit Employee - {{currentEditEmployeeName()}}</h5>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="employeeForm">
-                        <div class="mb-3">
-                            <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" formControlName="fullName" class="form-control" id="fullName"
-                                placeholder="Enter full name">
-                            touched - {{employeeForm.controls['fullName'].touched}} <br>
-                            dirty - {{employeeForm.controls['fullName'].dirty}} <br>
-                            @if(employeeForm.controls['fullName'].touched) {
-                            <div class="text-danger">
-                                <!-- --{{eName.errors | json}} -->
-                                @if(employeeForm.controls['fullName'].errors?.['required']){
-                                <span>This is Required</span>
-                                }
-                                @if(employeeForm.controls['fullName'].errors?.['minlength']) {
-                                <span> Min 3 Char Needed</span>
-                                }
-                            </div>
-                            }
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" formControlName="email" class="form-control" id="email"
-                                placeholder="Enter email">
-                            @if(employeeForm.controls['email'].touched) {
-                            <div class="text-danger">
-                                <!-- --{{eName.errors | json}} -->
-                                @if(employeeForm.controls['email'].errors?.['required']){
-                                <span>This is Required</span>
-                                }
-                                @if(employeeForm.controls['email'].errors?.['email']) {
-                                <span> Email id is not Correct</span>
-                                }
-                            </div>
-                            }
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="tel" formControlName="phone" class="form-control" id="phone"
-                                placeholder="Enter phone number">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="gender" class="form-label">Gender</label>
-                            <select formControlName="gender" class="form-control" id="gender">
-                                <option value="">Select Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="dateOfJoining" class="form-label">Date of Joining</label>
-                            <input type="date" formControlName="dateOfJoining" class="form-control" id="dateOfJoining">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="departmentId" class="form-label">Department</label>
-                            <select class="form-control" formControlName="departmentId"
-                                (change)="getDesignationByDeptId()" id="departmentId">
-                                <option value="">Select Department </option>
-                                @for (item of deptmentList(); track $index) {
-                                <option [value]="item.departmentId"> {{item.departmentName}}</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="designationId" class="form-label">Designation</label>
-                            <select class="form-control" formControlName="designationId" id="designationId">
-                                <option value="">Select Designation</option>
-                                @for (item of designationList(); track $index) {
-                                <option [value]="item.designationId"> {{item.designationName}}</option>
-                                }
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="employeeType" class="form-label">Employee Type</label>
-                            <select class="form-control" formControlName="employeeType" id="employeeType">
-                                <option value="">Select Type</option>
-                                <option value="Full-Time">Full-Time</option>
-                                <option value="Part-Time">Part-Time</option>
-                                <option value="Contract">Contract</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="number" formControlName="salary" class="form-control" id="salary"
-                                placeholder="Enter salary">
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="button" [disabled]="employeeForm.invalid" (click)="onSaveEmp()"
-                                class="btn btn-success">Save Employee</button>
-                            <button type="reset" class="btn btn-secondary">Clear</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        }
+         
 
 
         <!-- Form Column -->
