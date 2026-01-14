@@ -8,10 +8,11 @@ import { NaPipe } from '../../pipes/na-pipe';
 import { Highlight } from '../../directives/highlight';
 import {  VendorModel } from '../../models/classes/vendor.model';
 import { IVendorModel } from '../../models/interfaces/Employee.Model';
-
+import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
+import type { ColDef, RowSelectionOptions } from 'ag-grid-community';
 @Component({
   selector: 'app-vendor-master',
-  imports: [FormsModule,NaPipe,Highlight],
+  imports: [FormsModule,NaPipe,Highlight,AgGridAngular],
   templateUrl: './vendor-master.html',
   styleUrl: './vendor-master.css',
 })
@@ -21,7 +22,48 @@ export class VendorMaster implements OnInit {
   private http = inject(HttpClient);
   vendorList = signal<VendorModel[]>([]);
 
-  utiltiySrv =  inject(Utility)
+  utiltiySrv =  inject(Utility);
+
+  editRecord  = signal<any>({})
+
+   colDefs: ColDef[] = [
+        { field: "vendorName" ,headerName:'Vendor Name', sortable: true},
+        { field: "contactNo",headerName:'Contact', sortable: true },
+        { field: "emailId",headerName:'Email' } ,
+        { 
+          headerName:'Action', 
+          cellRenderer: (params: any) => {
+            const eDiv = document.createElement('div');
+            eDiv.innerHTML = `
+              <button class="btn btn-sm btn-success me-2" style="padding: 4px 8px; font-size: 12px;">Edit</button>
+              <button class="btn btn-sm btn-danger" style="padding: 4px 8px; font-size: 12px;">Delete</button>
+            `;
+            
+            const editBtn = eDiv.querySelector('.btn-success');
+            const deleteBtn = eDiv.querySelector('.btn-danger');
+            
+            editBtn?.addEventListener('click', () => {
+              debugger;
+              this.onEdit(params.data);
+            });
+            
+            deleteBtn?.addEventListener('click', () => {
+              this.onDelete(params.data.vendorId);
+            });
+            
+            return eDiv;
+          },
+          width: 180,
+          sortable: false,
+          filter: false
+        }
+    ];
+     defaultColDef: ColDef = {
+    flex: 1,
+  };
+  rowSelection: RowSelectionOptions | "single" | "multiple" = {
+    mode: "multiRow",
+  };
 
   coruserName: string;
 
@@ -124,7 +166,9 @@ export class VendorMaster implements OnInit {
   }
 
   onEdit(data: any) {
+    debugger;
     this.newVendorObj = data;
+    this.editRecord.set(data);
   }
 
 

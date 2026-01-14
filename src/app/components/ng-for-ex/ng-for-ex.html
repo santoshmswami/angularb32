@@ -1,4 +1,26 @@
+<div class="row">
+    <div class="col-3">
+        <select name="" id="">
+            @for (item of cityList; track $index) {
+            <option value="">{{item}}</option>
+            }
+        </select>
+    </div>
+    <div class="col-3">
+        <p-select [options]="cityList" [filter]="true" placeholder="Select a City" class="w-full md:w-56" />
+    </div>
+    <div class="col-3">
+        <p-datepicker [(ngModel)]="date" [minDate]="minDate" />
+    </div>
+</div>
+
+<button (click)="stopTimer()">stop timer</button>
+
+
 <app-alert [alertType]="alertType" [alertMessage]="'Api call Fails'"></app-alert>
+
+<br>
+<input type="date">
 
 <br>
 <app-alert [alertType]="'Warning'" [alertMessage]="'Duplicate Aadhar Not Alalwed'"></app-alert>
@@ -63,7 +85,8 @@
                     <td>{{stud.surname | napipe:'na'}}</td>
                     <td>{{stud['city'] }}</td>
                     <td>
-                        <app-progress-bar [progressColorClassName]="'bg-success'" [progressValue]="stud.attendancePer"></app-progress-bar>
+                        <app-progress-bar [progressColorClassName]="'bg-success'"
+                            [progressValue]="stud.attendancePer"></app-progress-bar>
                     </td>
 
                     <!-- <td>
@@ -157,3 +180,46 @@
         </div>
     </div> -->
 </div>
+<br>
+<br>
+<p-table [value]="studentList"  [paginator]="true"
+    [rows]="5"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [rowsPerPageOptions]="[5, 10, 20]">
+     <ng-template #header>
+        <tr>
+            <th pSortableColumn="surname" style="width:20%">
+                <div class="flex items-center gap-2">
+                    surname
+                    <p-sortIcon field="surname" />
+                </div>
+            </th>
+            <th pSortableColumn="isActive" style="width:20%">
+                <div class="flex items-center gap-2">
+                    isActive
+                    <p-sortIcon field="isActive" />
+                </div>
+            </th>
+            <th pSortableColumn="category" style="width:20%">
+                <div class="flex items-center gap-2">
+                    Category
+                    <p-sortIcon field="category" />
+                </div>
+            </th>
+            <th pSortableColumn="quantity" style="width:20%">
+                <div class="flex items-center gap-2">
+                    Quantity
+                    <p-sortIcon field="quantity" />
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-product>
+        <tr>
+            <td>{{ product.surname }}</td>
+            <td>{{ product.surname }}</td>
+            <td>{{ product.isActive }}</td>
+            <td>{{ product.quantity }}</td>
+        </tr>
+    </ng-template>
+</p-table>
